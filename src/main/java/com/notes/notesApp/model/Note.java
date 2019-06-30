@@ -1,21 +1,20 @@
 package com.notes.notesApp.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -38,8 +37,8 @@ public class Note {
 	@JsonIgnore
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="user_id")
-	@OnDelete(action=OnDeleteAction.CASCADE)
 	private User user;
-	
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.REMOVE, orphanRemoval = true, mappedBy = "note")
+    private List<Tag> tags = new ArrayList<Tag>();
 
 }

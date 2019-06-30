@@ -1,0 +1,109 @@
+<HTML xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+	
+	<f:metadata>
+	  <f:viewAction action="#{note.loggedUser()}" />
+	</f:metadata>
+
+	<h:head></h:head>
+	
+<h:body>
+	
+	
+	<p:layout style="min-height:1000px;">
+    <p:layoutUnit position="west" resizable="false" size="200" minSize="40" maxSize="200">
+       
+		<BR />
+		<BR />
+		<BR />
+		<p:button outcome="createNote.xhtml" value="Write a note" style="margin-right:20px;">
+		</p:button>
+		
+		<BR />
+		<BR />
+		<p:button outcome="index.xhtml" value="Home" style="margin-right:20px;">
+			 
+		</p:button>
+		<BR />
+		<BR />
+		<BR />
+		
+				
+		<h:form>
+			<p:outputLabel for="@next" value="Search by:" />
+			<p:inputText  id="search" value="#{note.searchTag}" required="true" />
+			<p:commandButton value="Search" action="searchNotes.xhtml" />
+		</h:form >
+		
+    </p:layoutUnit>
+ 
+    <p:layoutUnit position="center">
+    
+		
+		 <h3>All #{note.loggedInUser} notes</h3>
+		
+		<h:form id="form">
+		
+		    <p:repeat value="#{note.allNotes}" var="noteVar">
+		   
+		        <p:panel id="horizontal" header="#{noteVar.title}" toggleable="true" toggleOrientation="horizontal">
+		        <h:panelGrid columns="2" cellpadding="10" width="100%">
+		   				 <p:row>
+		   				 	<p:repeat var="tagVar" value="#{tag.getAllTags(noteVar.note_id)}">
+		   				 		<h:outputText value="#{tagVar}" escape="false"/>
+				        	</p:repeat>
+				        </p:row>
+						<p:row>
+				            <h:outputText escape="false" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap; width:300px; display:block;" value="#{noteVar.content}" />
+				     			    
+				        	<p:commandButton value="Delete note" action="#{note.deleteNote(noteVar.note_id)}" />
+				        </p:row>		   				
+				         
+				       
+		            
+		                
+		        </h:panelGrid>
+		    </p:panel>
+		        <hr />
+		    </p:repeat>
+
+
+		  </h:form>
+				
+		
+		
+
+    </p:layoutUnit>
+    <p:layoutUnit position="east" resizable="false" size="200" minSize="40" maxSize="200">
+    	<h3>Latest notes</h3>
+        <h:form id="formSide">
+		    <p:repeat value="#{note.lastFiveNotes}" var="noteVar">
+		        <p:panel id="horizontal" header="#{noteVar.title}" toggleable="true" toggleOrientation="horizontal">
+		        <h:panelGrid columns="2" cellpadding="10">
+		   
+		            <h:outputText
+		                value="#{noteVar.content}" escape="false"/>
+		        </h:panelGrid>
+		    </p:panel>
+		        <hr />
+		    </p:repeat>
+		 
+		  </h:form>
+    </p:layoutUnit>
+</p:layout>
+	 
+		
+			
+</h:body>
+
+
+
+
+
+
+
+
+
+</HTML>

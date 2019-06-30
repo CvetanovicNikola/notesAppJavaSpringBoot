@@ -1,0 +1,60 @@
+<HTML xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Registration form</title>
+</h:head>
+<h:body>
+	 
+	 
+	 <p:layout >
+	    <p:layoutUnit position="west" resizable="false" size="100" minSize="40" maxSize="200">
+	        West
+	    </p:layoutUnit>
+	 
+	    <p:layoutUnit position="center">
+	    <h1>Login</h1>
+	     <font color="red">
+		     ${SPRING_SECURITY_LAST_EXCEPTION.message}
+                </font>
+	    <form action="login" method="POST">
+			<table>
+				<tr>
+					<td>User:</td>
+					<td><input type="text" name="username" /></td>
+				</tr>
+				<tr>
+					<td>Password : </td>
+					<td><input name="password" type="password"/></td>
+				</tr>
+				<tr>
+					<td><input name="submit" type="submit" value="submit"/></td>
+								
+				</tr>
+			</table>
+	    
+	
+	  </form>
+		<BR />
+		<BR />
+		<BR />
+		<BR />
+		
+		<BR />
+		<BR />
+		<BR />
+				
+	    </p:layoutUnit>
+	    <p:layoutUnit position="east" size="100">
+	        east
+	    </p:layoutUnit>
+	</p:layout>
+	
+</h:body>
+
+
+
+
+</HTML>

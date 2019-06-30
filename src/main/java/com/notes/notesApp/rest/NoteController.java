@@ -14,21 +14,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.notes.notesApp.exceptions.NoteNotFoundException;
 import com.notes.notesApp.model.Note;
+import com.notes.notesApp.model.Tag;
 import com.notes.notesApp.repository.NoteRepository;
+import com.notes.notesApp.repository.TagRepository;
+import com.notes.notesApp.utils.EmailUtil;
 
 @RestController
 public class NoteController {
 	
 	@Autowired
 	NoteRepository noteRepository;
-	
 	@Autowired
 	UserController userController;
+	@Autowired
+	TagRepository tagRepostiory;
+	@Autowired
+	EmailUtil emailUtil;
 	
 	@PostMapping("users/{user_id}/notes")
 	public Note createNote(@PathVariable long user_id, @RequestBody @Valid Note note) {
 		note.setUser(userController.getUserById(user_id));
 		note.setCreated(LocalDateTime.now());
+		//emailUtil.sendEmail("cvetanovic.nikola@gmail.com", "uspeh!", "USpelo MICA!!!");
 		return noteRepository.save(note);
 	}
 	@GetMapping("users/{user_id}/notes")
@@ -55,5 +62,14 @@ public class NoteController {
 	@DeleteMapping("notes/{note_id}")
 	public void deleteNote(@PathVariable long note_id) {
 		noteRepository.delete(getNote(note_id));
+	}
+	@GetMapping("notes/tag/{tag}")
+	public List<Note> getNotesByTag(@PathVariable String tag){
+		List<Tag> tags = tagRepostiory.findAll().stream()
+				.filter(t -> t.getContent().equals(tag))
+				.collect(Collectors.toList());
+		return tags.stream()
+				.map(Tag::getNote)
+				.collect(Collectors.toList());
 	}
 }

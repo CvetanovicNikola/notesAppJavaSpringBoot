@@ -1,0 +1,101 @@
+
+<HTML xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui"
+      xmlns:form="http://www.springframework.org/tags/form">
+
+<h:head>
+	<title>Registration form</title>
+</h:head>
+<h:body>
+
+
+	<p:layout >
+	    <p:layoutUnit position="west" resizable="false" size="100" minSize="40" maxSize="200">
+	        West
+	    </p:layoutUnit>
+	 
+	    <p:layoutUnit position="center">
+	        <BR />
+
+		<BR />
+		<h1>Create new user</h1>
+		 <font color="red">
+		     #{user.errorMessage}
+                </font>
+		<h:form>
+		 
+			<table>
+				<tr> 
+					<td>
+						<p:outputLabel for="@next" value="First name:" />
+						<p:inputText  id="fname"  value="#{user.name}" required="true"/>
+						<h:message for="fname" style="color:red;"/>
+					 </td>
+				</tr>
+				<tr>
+					
+					<td>
+						<p:outputLabel for="@next" value="Last name:" />
+						<p:inputText  id="lname" value="#{user.lastname}" required="true" />
+						
+						<h:message for="lname" style="color:red;"/>
+					 </td>	
+				</tr>
+				<tr>
+					<td>
+						<p:outputLabel for="@next" value="Username:" />
+						<p:inputText  id="uname" value="#{user.username}" required="true" />
+						<h:message for="uname" style="color:red;"/>
+					 </td>	
+				</tr>
+				<tr>
+					
+					<td>
+						<p:outputLabel for="@next" value="Password:" />
+						<p:inputText id="pword" value="#{user.password}" required="true" />
+						<h:message for="pword" style="color:red;"/>
+					 </td>	
+				</tr>
+				<tr>
+					
+					<td>
+						<p:outputLabel for="@next" value="Email add:" />
+						<p:inputText id="email" value="#{user.email}" required="true"/>
+					<h:message for="email" style="color:red;"/>
+					 </td>	
+				</tr>
+				
+				
+				
+			
+			</table>
+			<p><h:messages /></p>
+			<p>
+				<p:commandButton value="Register" action="#{user.createUser()}" />
+				
+			</p>
+		</h:form>
+			<BR />
+			<p:button outcome="index.xhtml" value="Home" style="margin-right:20px;">
+				
+			</p:button>
+			<BR />
+			<BR />
+			<BR />
+			
+		    </p:layoutUnit>
+		    <p:layoutUnit position="east" size="100">
+		       east
+		    </p:layoutUnit>
+	</p:layout>
+	 
+		
+		
+</h:body>
+
+
+
+
+</HTML>

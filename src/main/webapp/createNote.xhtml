@@ -1,0 +1,114 @@
+<HTML xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Create note form</title>
+</h:head>
+<h:body>
+	
+	
+	
+	
+	<p:layout style="min-height:1000px;">
+    <p:layoutUnit position="west" resizable="false" size="100" minSize="40" maxSize="200">
+        West
+    </p:layoutUnit>
+ 
+    <p:layoutUnit position="center">
+    <BR/>
+    <h1>Create a note</h1>
+    <font color="red">
+		        #{note.errorMessage}
+                </font>
+        <h:form>
+	 
+		<table>
+		
+			<tr>
+				
+				<td>
+					<p:outputLabel for="@next" value="Title:" />
+					<p:inputText  id="title" value="#{note.title}" required="true" />
+					
+					<h:message for="lname" style="color:red;"/>
+				 </td>	
+			</tr>
+			
+				<tr>
+				
+				<td>
+					
+					<h:panelGrid columns="2">
+					    <p:outputLabel for="@next" value="Tag:" />
+					    <p:chips id="tag"  value="#{note.tags}" required="false"/>
+					</h:panelGrid>
+					
+					
+					<h:message for="lname" style="color:red;"/>
+				 </td>	
+			</tr>		
+			<tr>
+				
+				<td>
+					  
+    
+					    <p:textEditor widgetVar="editor2" value="#{note.content}" height="300" style="margin-bottom:10px" placeholder="Enter your content" >
+					        <f:facet name="toolbar">
+					             <span class="ql-formats">
+					                <button class="ql-bold"></button>
+					                <button class="ql-italic"></button>
+					                <button class="ql-underline"></button>
+					                <button class="ql-strike"></button>
+					            </span>
+					            <span class="ql-formats">
+					                <select class="ql-font"></select>
+					                <select class="ql-size"></select>
+					            </span>
+					        </f:facet>
+					    </p:textEditor>
+					     
+					    <p:commandButton action="#{note.createNote()}" value="Submit" update="display" oncomplete="PF('dlg').show()" icon="pi pi-save" />
+					    <p:commandButton value="Clear" type="button" onclick="PF('editor2').clear();" icon="pi pi-times" />
+					     
+					    <p:dialog header="New note created" widgetVar="dlg" showEffect="fade" hideEffect="fade">
+					        <p:outputPanel id="display">
+					            
+					            <h:outputText value="#{note.title}" escape="false" />
+					 					          					            
+					        </p:outputPanel>
+					    </p:dialog>     
+					
+				 </td>	
+			</tr>
+					
+			
+			
+		
+		</table>
+		
+	</h:form>
+		<BR />
+		<p:button outcome="index.xhtml" value="Home" style="margin-right:20px;">
+			
+		</p:button>
+		<BR />
+		<p:button outcome="allNotes.xhtml" value="View all notes" style="margin-right:20px;">
+			 
+		</p:button>
+    </p:layoutUnit>
+    <p:layoutUnit position="east" resizable="false" size="100" minSize="40" maxSize="200">
+        east
+    </p:layoutUnit>
+</p:layout>
+	 
+	
+		
+		
+</h:body>
+
+
+
+
+</HTML>
