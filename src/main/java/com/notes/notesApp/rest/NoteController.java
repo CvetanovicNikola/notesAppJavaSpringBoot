@@ -1,6 +1,9 @@
 package com.notes.notesApp.rest;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
@@ -34,7 +37,8 @@ public class NoteController {
 	@PostMapping("users/{user_id}/notes")
 	public Note createNote(@PathVariable long user_id, @RequestBody @Valid Note note) {
 		note.setUser(userController.getUserById(user_id));
-		note.setCreated(LocalDateTime.now());
+		DateTimeFormatter timeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL).withZone(ZoneId.systemDefault());
+		note.setCreated(timeFormatter.format(LocalDateTime.now()));
 		//emailUtil.sendEmail("cvetanovic.nikola@gmail.com", "uspeh!", "USpelo MICA!!!");
 		return noteRepository.save(note);
 	}

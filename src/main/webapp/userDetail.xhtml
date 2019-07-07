@@ -6,8 +6,9 @@
 	<h:head>
 		<f:metadata>
 			<f:viewParam name="userId" value="#{user.userId}"/>
+			
 		</f:metadata>
-	
+		
 	</h:head>
 	
 	<h:body>
@@ -33,6 +34,10 @@
              <p:column headerText="Email" width="30">
                 <h:outputText value="#{userVar.email}" />
             </p:column>
+           <p:column style="width:20px">
+                    <p:button outcome="allUserNotes.xhtml" value="Users notes" style="margin-right:20px;"/>
+                        
+            </p:column>
             <p:column style="width:20px">
                     <p:commandButton style="color:red" value="Delete this user" action="#{user.deleteUser(userVar.user_id)}" />
                         
@@ -45,12 +50,9 @@
 	
 		<BR />
 	
+		
 		<BR />
-		<p:button outcome="createNote.xhtml" value="Create a note" style="margin-right:20px;">
-			 
-		</p:button>
-		<BR />
-		<p:button outcome="index.xhtml" value="Home" style="margin-right:20px;">
+		<p:button outcome="admin.xhtml" value="Back to all users" style="margin-right:20px;">
 			 
 		</p:button>
 	</h:body>

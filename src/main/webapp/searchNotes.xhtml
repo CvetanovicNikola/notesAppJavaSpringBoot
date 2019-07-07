@@ -5,16 +5,28 @@
 	
 	<f:metadata>
 	  <f:viewAction action="#{note.loggedUser()}" />
+	  
 	</f:metadata>
-
-	<h:head></h:head>
+	
+	<h:head>
+		
+	</h:head>
 	
 <h:body>
+	<h:outputStylesheet library="css" name="notes.css"/>
+	 <div id="header">
+		
+		<img id="responsive-image" src="img/writing-1.jpg"  alt="header"/>
+	  </div>
 	
-	
-	<p:layout style="min-height:1000px;">
+	<p:layout class="l">
     <p:layoutUnit position="west" resizable="false" size="200" minSize="40" maxSize="200">
-       
+       	<BR />
+		<BR />
+		<BR />
+       	<p class="text">Logged in as :</p>
+       	
+     	#{note.loggedInUser}
 		<BR />
 		<BR />
 		<BR />

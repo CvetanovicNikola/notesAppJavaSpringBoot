@@ -1,0 +1,70 @@
+<HTML xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
+			
+	</h:head>
+	
+	<h:body>
+	
+	
+	<h:form id="userNotes">
+    <p:fieldset id="notes" legend="User notes" style="color:red">
+        <p:dataTable id="userNoteData" var="userNoteVar" value="#{user.userById.notes}" >
+          
+            <p:column headerText="Title" width="30">
+                <h:outputText value="#{userNoteVar.title}" escape="false"/>
+            </p:column>
+ 			
+         
+             <p:column headerText="date" width="30">
+                <h:outputText value="#{userNoteVar.created}" escape="false"/>
+            </p:column>
+              <p:column headerText="Content" width="30">
+                <h:outputText value="#{userNoteVar.content}" escape="false"/>
+            </p:column>
+                    
+        </p:dataTable>
+    </p:fieldset>
+    	
+	</h:form>
+	
+		<BR />
+	
+		
+		<BR />
+		<p:button outcome="admin.xhtml" value="Back to user details" style="margin-right:20px;">
+			 
+		</p:button>
+	</h:body>
+
+
+</HTML>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

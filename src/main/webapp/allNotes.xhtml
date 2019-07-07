@@ -6,15 +6,37 @@
 	<f:metadata>
 	  <f:viewAction action="#{note.loggedUser()}" />
 	</f:metadata>
-
-	<h:head></h:head>
-	
+		
+	<h:head>
+			 
+	</h:head>
+	 
 <h:body>
+	<h:outputStylesheet library="css" name="notes.css"/>
+	 <div id="header">
+		
+		<img id="responsive-image" src="img/writing-1.jpg"  alt="header"/>
+	  </div>
 	
-	
-	<p:layout style="min-height:1000px;">
+	<p:layout class="l">
     <p:layoutUnit position="west" resizable="false" size="200" minSize="40" maxSize="200">
-       
+       	<BR />
+		<BR />
+		<BR />
+       	<p class="text">Logged in as :</p>
+       	
+     	#{note.loggedInUser}
+     	<BR />
+		<BR />
+		<BR />
+		<a href="/logout">Logout</a>
+   
+		<BR />
+		<BR />
+		<BR />
+		<p:button outcome="updateUser.xhtml" value="Update your account" style="margin-right:20px;">
+		</p:button>
+		
 		<BR />
 		<BR />
 		<BR />
@@ -49,22 +71,39 @@
 		    <p:repeat value="#{note.allNotes}" var="noteVar">
 		   
 		        <p:panel id="horizontal" header="#{noteVar.title}" toggleable="true" toggleOrientation="horizontal">
-		        <h:panelGrid columns="2" cellpadding="10" width="100%">
-		   				 <p:row>
-		   				 	<p:repeat var="tagVar" value="#{tag.getAllTags(noteVar.note_id)}">
+		      
+		      	  <tr>
+		         	<td>
+		        		<p class="text">Created : #{noteVar.created}</p>
+		        	</td>
+		        	
+		        </tr>
+		        <tr>
+		       		<td>
+		        		<p class="text">Tags : </p>
+		        	</td>
+		        	<td>
+		        		<p:repeat var="tagVar" value="#{tag.getAllTags(noteVar.note_id)}">
 		   				 		<h:outputText value="#{tagVar}" escape="false"/>
-				        	</p:repeat>
-				        </p:row>
-						<p:row>
-				            <h:outputText escape="false" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap; width:300px; display:block;" value="#{noteVar.content}" />
-				     			    
-				        	<p:commandButton value="Delete note" action="#{note.deleteNote(noteVar.note_id)}" />
-				        </p:row>		   				
-				         
-				       
-		            
-		                
-		        </h:panelGrid>
+				        </p:repeat>
+		        	</td>
+		        </tr>
+		         <tr>
+		         	<td>
+		        		<p class="text">Note : </p>
+		        	</td>
+		        	<td>
+		        		<h:outputText escape="false" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap; width:300px; display:block;" value="#{noteVar.content}" />
+		        	</td>
+		        </tr>
+		        <tr>
+		        	<td>
+		        		<p:commandButton value="Delete note" action="#{note.deleteNote(noteVar.note_id)}" />
+		        	</td>
+		        </tr>
+		        
+		        
+		        
 		    </p:panel>
 		        <hr />
 		    </p:repeat>

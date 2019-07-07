@@ -6,7 +6,7 @@
       xmlns:form="http://www.springframework.org/tags/form">
 
 	<h:head>
-		<title>Registration form</title>
+		<title>Update user form</title>
 		
 	</h:head>
 	<h:body>
@@ -16,41 +16,33 @@
 	  </div>
 
 	<p:layout class="l">
-	    <p:layoutUnit position="west" resizable="false" size="100" minSize="40" maxSize="200">
-	    
+	    <p:layoutUnit position="west" resizable="false" size="200" minSize="40" maxSize="200">
+	    <BR />
+		<BR />
+	    <p class="text">Current username :</p>
+	    #{note.loggedInUser}
+	    <p class="text">Current password :</p>
+	    #{note.loggedInUserPassword}
+	    <p class="text">Email : </p>
+	    #{note.loggedInUserEmail}
 	    </p:layoutUnit>
 	 
 	    <p:layoutUnit position="center">
 	        <BR />
 
 		<BR />
-		<h1>Create new user</h1>
+		<h1>Update user</h1>
 		 <font color="red">
 		     #{user.errorMessage}
                 </font>
 		<h:form>
 		 
 			<table>
-				<tr> 
-					<td>
-						<p:outputLabel for="@next" value="First name:" />
-						<p:inputText  id="fname"  value="#{user.name}" required="true"/>
-						<h:message for="fname" style="color:red;"/>
-					 </td>
-				</tr>
-				<tr>
-					
-					<td>
-						<p:outputLabel for="@next" value="Last name:" />
-						<p:inputText  id="lname" value="#{user.lastname}" required="true" />
-						
-						<h:message for="lname" style="color:red;"/>
-					 </td>	
-				</tr>
+				
 				<tr>
 					<td>
 						<p:outputLabel for="@next" value="Username:" />
-						<p:inputText  id="uname" value="#{user.username}" required="true" />
+						<p:inputText  id="uname" value="#{user.updateUsername}" required="false" />
 						<h:message for="uname" style="color:red;"/>
 					 </td>	
 				</tr>
@@ -58,7 +50,7 @@
 					
 					<td>
 						<p:outputLabel for="@next" value="Password:" />
-						<p:inputText id="pword" value="#{user.password}" required="true" />
+						<p:inputText id="pword" value="#{user.updatePassword}" required="false" />
 						<h:message for="pword" style="color:red;"/>
 					 </td>	
 				</tr>
@@ -66,7 +58,7 @@
 					
 					<td>
 						<p:outputLabel for="@next" value="Email add:" />
-						<p:inputText id="email" value="#{user.email}" required="true"/>
+						<p:inputText id="email" value="#{user.updateEmail}" required="false"/>
 					<h:message for="email" style="color:red;"/>
 					 </td>	
 				</tr>
@@ -77,12 +69,12 @@
 			</table>
 			<p><h:messages /></p>
 			<p>
-				<p:commandButton value="Register" action="#{user.createUser()}" />
+				<p:commandButton value="Update" action="#{user.updateUser()}" />
 				
 			</p>
 		</h:form>
 			<BR />
-			<p:button outcome="index.xhtml" value="Home" style="margin-right:20px;">
+			<p:button outcome="allNotes.xhtml" value="Your notes" style="margin-right:20px;">
 				
 			</p:button>
 			<BR />
@@ -90,7 +82,7 @@
 			<BR />
 			
 		    </p:layoutUnit>
-		    <p:layoutUnit position="east" size="100">
+		    <p:layoutUnit position="east" size="200">
 		   
 		    </p:layoutUnit>
 	</p:layout>

@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -31,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 		provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance()); //new BCryptPasswordEncoder()
 		return provider;
 	}
+	
 
     @Override
     protected void configure(HttpSecurity http) throws Exception
@@ -43,21 +45,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
          .antMatchers("/css/**").permitAll()
          .antMatchers("/login").permitAll()
          .antMatchers("/").permitAll()
+         .antMatchers("/img/**").permitAll()
          .antMatchers("/createUser.xhtml").permitAll()
          .antMatchers("/index.xhtml").permitAll()
          .antMatchers("/userDetail.xhtml").permitAll()
+         .antMatchers("/logout").permitAll()
          .anyRequest().authenticated()
          .and()
          .formLogin()
          .loginPage("/login").permitAll()
          .defaultSuccessUrl("/allNotes.xhtml", true)
-         //.failureUrl("/login.xhtml?error=true")
          .and()
+      
+        
          .logout().invalidateHttpSession(true)
-         .logoutSuccessUrl("/login.xhtml").permitAll()
+         .logoutSuccessUrl("/loggedOut.xhtml").permitAll()
          .clearAuthentication(true)
          .logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
         
     }
+    
 
  }

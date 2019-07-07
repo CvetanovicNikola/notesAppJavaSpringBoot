@@ -6,15 +6,25 @@
 	<h:head>
 		<f:metadata>
 			<f:viewParam name="noteId" value="#{note.noteId}"/>
+			<h:outputStylesheet library="css" name="notes.css"/> 
 		</f:metadata>
-	
+		
 	</h:head>
 	
 	<h:body>
 	
-	<p:layout >
-	    <p:layoutUnit position="west" resizable="false" size="100" minSize="40" >
-	        West
+	 <div id="header">
+		
+		<img id="responsive-image" src="src/writing-1.jpg"  alt="header"/>
+	  </div>
+	<p:layout class="l">
+	    <p:layoutUnit position="west" resizable="false" size="200" minSize="40" >
+	     	<BR />
+			<BR />
+			<BR />
+	       	<p class="text">Logged in as :</p>
+	       	
+	     	#{note.loggedInUser}
 	    </p:layoutUnit>
 	 
 	    <p:layoutUnit position="center">
@@ -38,10 +48,10 @@
 	            </p:column>
 	 
 	                      
-	        </p:dataTable>
+	        </p:dataTable>     
 	    </p:fieldset>
     	 
-	</h:form>
+	</h:form> 
 	
 		<BR />
 		
@@ -55,7 +65,7 @@
 		</p:button>
 	    </p:layoutUnit>
 	     <p:layoutUnit position="east" resizable="false" size="100" minSize="40" >
-	        east
+	        
 	    </p:layoutUnit>
 	</p:layout>
 	

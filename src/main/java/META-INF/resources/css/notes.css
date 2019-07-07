@@ -1,0 +1,55 @@
+@charset "ISO-8859-1";
+
+
+
+html {
+      min-height: 100%;
+    margin: 0;
+}
+
+body {
+	background-color: lightgray;
+    min-height: 100%;
+    margin: 0;
+}
+.l{
+	min-height: 80vh;
+}
+
+
+#responsive-image {  
+	width: 100%;
+	height: 20%; 
+	
+
+}
+#responsive-imag1e {  
+	width: 100%;
+	height: 20%; 
+	border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 20px;
+    width: 200px;
+    height: 150px;
+}  
+
+
+.submit, .ui-button, .ui-button.ui-widget.ui-state-default.ui-corner-all, .ui-button-text-only {
+	background-color: rgb(255, 204, 0);
+	color: rgb(0, 0, 0);
+	box-shadow: 5px 5px grey;
+}
+
+.ui-panel-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-all, .ui-fieldset-legend.ui-corner-all.ui-state-default{
+	background-color: rgb(255, 204, 0);
+	color: rgb(0, 0, 0);
+	
+}
+
+.ui-inputfield.ui-inputtext.ui-widget.ui-state-default.ui-corner-all{
+	width: 100%;
+} 
+.text{
+	font-weight: bold;
+	color: rgb(0, 0, 0);
+}

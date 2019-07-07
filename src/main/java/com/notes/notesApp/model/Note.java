@@ -33,7 +33,7 @@ public class Note {
 	@NotNull
 	@Size(min=3, message="A note must be at least 3 characters long!")
 	private String content;
-	private LocalDateTime created;
+	private String created;
 	@JsonIgnore
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="user_id")

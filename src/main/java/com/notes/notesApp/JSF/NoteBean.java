@@ -2,6 +2,8 @@ package com.notes.notesApp.JSF;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,7 +11,7 @@ import java.util.stream.Collectors;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
+ 
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,6 +20,7 @@ import com.notes.notesApp.exceptions.UserNotfoundException;
 import com.notes.notesApp.model.Note;
 import com.notes.notesApp.model.Tag;
 import com.notes.notesApp.model.User;
+import com.notes.notesApp.repository.TagRepository;
 import com.notes.notesApp.rest.NoteController;
 import com.notes.notesApp.rest.TagController;
 import com.notes.notesApp.rest.UserController;
@@ -39,6 +42,8 @@ public class NoteBean implements Serializable{
 	
 	@Autowired
 	UserController userController;
+	@Autowired
+	TagRepository tagRepository;
 	
 	private String title;
 	private String content;
@@ -46,6 +51,8 @@ public class NoteBean implements Serializable{
 	private long noteId;
 	private String errorMessage;
 	private String loggedInUser;
+	private String loggedInUserPassword;
+	private String loggedInUserEmail;
 	private String searchTag;
 	private List<String> tags;
 	
@@ -68,14 +75,14 @@ public class NoteBean implements Serializable{
 			n.setUser(userBean.getUser());
 			n.setTitle(title);
 			n.setContent(content);
-			n.setCreated(LocalDateTime.now());
 			noteController.createNote(getLoggedUserId(), n);
 			Tag tag = new Tag();
 			tagContent = tags.stream()
 				.collect(Collectors.joining(", "));
 			tag.setContent(tagContent);
 			tagController.createTag(n.getNote_id(), tag);
-			return "noteDetail.xhtml?noteId=" + n.getNote_id() + "&faces-redirect=true";
+			return "allNotes?faces-redirect=true";
+			//return "noteDetail.xhtml?noteId=" + n.getNote_id() + "&faces-redirect=true";
 		}
 		catch (Exception e) {
 			errorMessage = e.getMessage();
@@ -86,6 +93,8 @@ public class NoteBean implements Serializable{
 	
 	public void loggedUser() {
 		loggedInUser = userController.getUserById(getLoggedUserId()).getUsername();
+		loggedInUserPassword = userController.getUserById(getLoggedUserId()).getPassword();
+		loggedInUserEmail = userController.getUserById(getLoggedUserId()).getEmail();
 		
 	}
 	
@@ -114,20 +123,17 @@ public class NoteBean implements Serializable{
 	}
 	
 	public List<Note> search(){
+	
+	
 		
-//		return getAllNotes().stream()
-//				.filter(n -> n.getTags().stream().anyMatch(t -> t.getContent().equals(searchTag)))
-//				.collect(Collectors.toList());
-//	
+		
+//		List<Tag> tags = tagRepository.findAll().stream().filter(t ->t.getContent().equals(searchTag)).collect(Collectors.toList());
+//		List<Long> notes = tags.stream().filter(n -> n.getTag_id()==)
 		return getAllNotes().stream()
-				.filter(n -> n.getTitle().equals(searchTag))
+				.filter(n -> n.getTitle().toLowerCase().contains(searchTag.toLowerCase())) 
+						
 				.collect(Collectors.toList());
 	}
 	
-	public void openCreateNote() {
-		PrimeFaces.current().dialog().openDynamic("/createNote.xhtml");
-	}
-	public void openPopup() {
-		PrimeFaces.current().executeScript("PF('welcomeDialog').show();");
-	}
+
 }
